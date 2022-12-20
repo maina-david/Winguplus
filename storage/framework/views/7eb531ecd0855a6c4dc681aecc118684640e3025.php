@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/winguplus/cloud.winguplus.com/resources/views/app/crm/customers/send.blade.php ENDPATH**/ ?>

@@ -1,0 +1,90 @@
+<?php $__env->startSection('title','Brand Update | Point Of Sale'); ?>
+
+
+<?php $__env->startSection('sidebar'); ?>
+	<?php echo $__env->make('app.pos.partials._menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('content'); ?>
+   <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+         <li class="breadcrumb-item"><a href="<?php echo route('pos.dashboard'); ?>">P.O.S</a></li>
+         <li class="breadcrumb-item"><a href="<?php echo route('pos.product.brand'); ?>">Brands</a></li>
+         <li class="breadcrumb-item active">Edit</li>
+      </ol>
+      <!-- end breadcrumb -->
+      <!-- begin page-header -->
+      <h1 class="page-header"><i class="fal fa-certificate"></i> Edit Brand </h1>
+      <!-- end page-header -->
+      <?php echo $__env->make('partials._messages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <div class="row">
+         <div class="col-md-6">
+            <div class="panel panel-inverse">
+               <div class="panel-body">
+                  <div class="panel-body">
+                     <table id="data-table-default" class="table table-striped table-bordered">
+                        <thead>
+                           <tr>
+                              <th width="1%">#</th>
+                              <th>Name</th>
+                              
+                              <th width="20%">Actions</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <?php $__currentLoopData = $brands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $count=>$br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                              <tr>
+                                 <td><?php echo $count+1; ?></td>
+                                 <td><?php echo $br->name; ?></td>
+                                 
+                                 <td>
+                                    <a href="<?php echo e(route('pos.product.brand.edit', $br->brand_code)); ?>" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                    <a href="<?php echo route('pos.product.brand.destroy', $br->brand_code); ?>" class="btn btn-danger btn-sm delete"><i class="fas fa-trash"></i></a>
+                                 </td>
+                              </tr>
+                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="panel panel-default">
+               <div class="panel-heading">
+                  <h4 class="panel-title">Update Brand</h4>
+               </div>
+               <div class="panel-body">
+                  <div class="panel-body">
+                     <?php echo Form::model($brand, ['route' => ['pos.product.brand.update',$brand->brand_code], 'method'=>'post','enctype'=>'multipart/form-data','data-parsley-validate' => '']); ?>
+
+                        <?php echo csrf_field(); ?>
+                        <div class="form-group form-group-default required">
+                           <?php echo Form::label('name', 'Name', array('class'=>'control-label')); ?>
+
+                           <?php echo Form::text('name', null, array('class' => 'form-control', 'placeholder' => 'Enter Brand Name','required' => '')); ?>
+
+                        </div>
+                        <div class="form-group mt-4">
+                           <center>
+                              <button type="submit" class="btn btn-pink submit"><i class="fas fa-save"></i> Update brand</button>
+                              <img src="<?php echo asset('assets/img/btn-loader.gif'); ?>" class="submit-load none" alt="" width="25%">
+                           </center>
+                        </div>
+                     <?php echo Form::close(); ?>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/winguplus/cloud.winguplus.com/resources/views/app/pos/products/brands/edit.blade.php ENDPATH**/ ?>

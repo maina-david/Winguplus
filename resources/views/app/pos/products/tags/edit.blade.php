@@ -1,0 +1,85 @@
+@extends('layouts.app')
+{{-- page header --}}
+@section('title','Update Tags | Point Of Sale')
+
+{{-- dashboad menu --}}
+@section('sidebar')
+	@include('app.pos.partials._menu')
+@endsection
+
+{{-- content section --}}
+@section('content')
+   <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+         <li class="breadcrumb-item"><a href="{!! route('pos.dashboard') !!}">P.O.S</a></li>
+         <li class="breadcrumb-item"><a href="{!! route('pos.product.tags') !!}">Product Tags</a></li>
+         <li class="breadcrumb-item active">Update</li>
+      </ol>
+      <!-- end breadcrumb -->
+      <!-- begin page-header -->
+      <h1 class="page-header"><i class="fal fa-tags"></i> Product Tags | Update  </h1>
+      <!-- end page-header -->
+      @include('partials._messages')
+      <div class="row">
+            <div class="col-md-6">
+               <div class="panel panel-inverse">
+                  <div class="panel-body">
+                     <div class="panel-body">
+                        <table id="data-table-default" class="table table-striped table-bordered">
+                           <thead>
+                              <tr>
+                                 <th width="1%">#</th>
+                                 <th>Name</th>
+                                 {{-- <th>Products</th> --}}
+                                 <th width="20%">Actions</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              @foreach($tags as $count=>$tg)
+                                 <tr>
+                                    <td>{!! $count+1 !!}</td>
+                                    <td>{!! $tg->name !!}</td>
+                                    {{-- <td>{!! Finance::products_by_tags_count($tg->id) !!}</td> --}}
+                                    <td>
+                                       <a href="{{ route('pos.product.tags.edit', $tg->id) }}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                       <a href="{!! route('pos.product.tags.destroy', $tg->id) !!}" class="btn btn-danger btn-sm delete"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                 </tr>
+                              @endforeach
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <h4 class="panel-title">Update Tag</h4>
+                  </div>
+                  <div class="panel-body">
+                     <div class="panel-body">
+                        {!! Form::model($tag, ['route' => ['pos.product.tags.update',$tag->id], 'method'=>'post','enctype'=>'multipart/form-data','data-parsley-validate' => '']) !!}
+                           @csrf
+                           <div class="form-group form-group-default required">
+                              {!! Form::label('name', 'Name', array('class'=>'control-label')) !!}
+                              {!! Form::text('name', null, array('class' => 'form-control', 'placeholder' => 'Enter Tag Name','required' => '')) !!}
+                           </div>
+                           <div class="form-group mt-4">
+                              <center>
+                                 <button type="submit" class="btn btn-pink submit"><i class="fas fa-save"></i> Update tags</button>
+                              </center>
+                           </div>
+                        {!! Form::close() !!}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+   </div>
+@endsection
+{{-- page scripts --}}
+@section('script')
+
+@endsection

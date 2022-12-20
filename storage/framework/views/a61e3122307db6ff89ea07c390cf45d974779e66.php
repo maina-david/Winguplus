@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/winguplus/cloud.winguplus.com/resources/views/app/salesflow/routes/show.blade.php ENDPATH**/ ?>

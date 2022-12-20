@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/winguplus/cloud.winguplus.com/resources/views/templates/temp07/print/theme.blade.php ENDPATH**/ ?>

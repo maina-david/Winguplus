@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/winguplus/cloud.winguplus.com/resources/views/app/assets/assets/events.blade.php ENDPATH**/ ?>
